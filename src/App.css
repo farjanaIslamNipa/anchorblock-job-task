@@ -6,3 +6,6 @@ body{
   margin: 0;
   box-sizing: border-box;
 }
+.custom-width{
+max-width: 444px !important;
+}

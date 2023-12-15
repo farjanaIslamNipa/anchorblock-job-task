@@ -9,7 +9,7 @@ const Input = ({ placeholder, error}) => {
       placeholder={placeholder} 
       className={`
       ' h-11 
-      w-[320px] 
+      w-[100%]
       bg-white 
       border 
       rounded-lg 
