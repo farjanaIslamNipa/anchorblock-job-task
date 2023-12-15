@@ -1,12 +1,11 @@
 import React from 'react';
 import {Outlet} from 'react-router-dom';
+import Navbar from '../../components/app/Navbar';
 
 const DashboardLayout = () => {
   return (
     <>
-        <div className='h-[73px] bg-brand flex items-center text-white'>
-      
-      </div>
+      <Navbar />
        <Outlet />
     </>
 
