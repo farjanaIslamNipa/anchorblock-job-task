@@ -7,18 +7,16 @@ body{
   box-sizing: border-box;
 }
 
+.custom-container{
+  @apply max-w-[1216px] mx-auto px-5 xl:px-0
+}
+
 .nav-link{
-  @apply p-3 rounded-[6px] text-base font-medium transform duration-200 ease-out
+  @apply px-3 py-2 rounded-[6px] text-base font-medium hover:bg-[#7F56D9] transform duration-200 ease-out
 }
-
-.custom-shadow {
-  box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px;
+.active{
+  @apply bg-[#7F56D9]
 }
-
-.language-item:last-child div span{
-  border-bottom: none !important;
-}
-
 @media(min-width:1024px){
  .full-width{
   width: 100% !important;
@@ -36,21 +34,8 @@ body{
     transition: 0.3s;
     white-space: nowrap;
   }
-  .left-nav{
-    left: 0;
-  }
-  .right-nav{
-    right: 0;
-  }
 }
 
-@media(min-width:768px){
- .md-full-width{
-  width: 80% !important;
-  height: auto;
- }
-
-}
 @media(max-width:767px){
   .md-nav-item-container{
     height: 100%;
@@ -62,4 +47,22 @@ body{
     transition: 0.3s;
     white-space: nowrap;
   }
+}
+.table-header{
+  @apply text-xs leading-[18px] font-medium text-[#667085] text-start
+}
+
+.user-table::-webkit-scrollbar {
+  height: 7px !important;
+  border-radius: 5px;
+}
+ 
+.user-table::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3) !important;
+  border-radius: 5px;
+}
+ 
+.user-table::-webkit-scrollbar-thumb {
+  background-color: #7F56D9 !important;
+  border-radius: 5px;
 }

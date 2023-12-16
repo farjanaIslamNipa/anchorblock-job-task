@@ -1,5 +1,5 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
+import {NavLink} from 'react-router-dom';
 import logo from '../../assets/images/logo-light.svg';
 import searchIcon from '../../assets/images/search-icon.svg';
 import settingsIcon from '../../assets/images/settings-icon.svg';
@@ -32,15 +32,15 @@ const closeSideNav = () =>{
     <>
       <div id="nav-height" className='relative'>
         <div className="z-50 bg-brand text-defaultGray lg:text-white 2xl:px-[200px] h-[73px]">
-          <div className='h-full flex items-center max-w-[1216px] mx-auto'>
+          <div className='h-full flex items-center custom-container'>
             {/* Logo section starts */}
-            <div className="w-full lg:w-[150px] px-5 lg:px-0">
+            <div className="w-full lg:w-[150px]">
               <div className="flex justify-between items-center">
                 <div className="bg-brand">
                   <div className='flex gap-3 items-center'>
-                    <Link to="/" >
+                    <NavLink to="/" >
                       <img src={logo} alt="Stack Logo" />
-                    </Link>
+                    </NavLink>
                     <div className='text-xl font-bold text-white'>Stack</div>
                   </div>
                 </div>
@@ -77,10 +77,10 @@ const closeSideNav = () =>{
                   <div className="block lg:hidden">
                     <div className="flex justify-between bg-brand px-2 h-[73px] items-center">
                       <div className="pl-4">
-                        <Link to="/" className='flex gap-3'>
+                        <NavLink to="/" className='flex gap-3'>
                           <img src={logo} alt='Stack logo' />
                           <span className='text-xl font-bold text-white inline-block'>Stack</span>
-                        </Link>
+                        </NavLink>
                       </div>
                       <div className="flex lg:hidden gap-2 items-center pr-3">
                         <button className='m-1'><img src={searchIcon} alt="Search" /></button>
@@ -116,36 +116,38 @@ const closeSideNav = () =>{
                   </div>
                   <div className="items-center pl-5 lg:pl-[50px] lg:flex justify-between">
                     <nav className="flex flex-col lg:flex-row pt-8 lg:pt-0">
-                      <Link
-                        to="#"
+                      <NavLink
+                        to="/"
                         onClick={closeSideNav}
+                        activeClassName='text-blue-500'
                         className="nav-link">
                           Home
-                      </Link>
-                      <Link
-                        to="#"
+                      </NavLink>
+                      <NavLink
+                        to="/users"
                         onClick={closeSideNav}
+                        activeClassName='is-active'
                         className="nav-link">
                           Users
-                      </Link>
-                      <Link
-                        to="#"
+                      </NavLink>
+                      <NavLink
+                        to="/projects"
                         onClick={closeSideNav}
                         className="nav-link">
                           Projects
-                      </Link>
-                      <Link
-                        to="#"
+                      </NavLink>
+                      <NavLink
+                        to="/tasks"
                         onClick={closeSideNav}
                         className="nav-link">
                           Tasks
-                      </Link>
-                      <Link
-                        to="#"
+                      </NavLink>
+                      <NavLink
+                        to="/reporting"
                         onClick={closeSideNav}
                         className="nav-link">
                           Reporting
-                      </Link>
+                      </NavLink>
                     </nav>
                     <div className="pt-4 lg:pt-0">
                       <div className="hidden lg:flex gap-2 items-center">

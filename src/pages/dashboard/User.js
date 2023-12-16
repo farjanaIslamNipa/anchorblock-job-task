@@ -1,10 +1,78 @@
 import React from 'react';
+import Button from '../../components/app/Button'
+import plusIcon from '../../assets/images/plus-icon.svg'
+import importIcon from '../../assets/images/import-icon.svg'
+// import uncheckedBox from '../../assets/images/unchecked-box.svg'
+// import checkedBox from '../../assets/images/checked-box.svg'
+import baseCheckBox from '../../assets/images/checkbox-base.svg'
+import downArrow from '../../assets/images/arrow-down.svg'
+import userLogo from '../../assets/images/user.svg'
+import deleteIcon from '../../assets/images/delete-icon.svg'
+import editIcon from '../../assets/images/edit-icon.svg'
+import UserTableRow from '../../components/UserTableRow';
 
 const User = () => {
   return (
-    <div>
-      This is user page
-      Lorem ipsum dolor sit amet consectetur, adipisicing elit. Repellat reiciendis architecto sequi sed quam aperiam, tenetur provident similique pariatur non, eaque inventore praesentium doloremque! Hic, rem nostrum. Quisquam reiciendis a sunt nihil iste numquam velit necessitatibus adipisci ut perferendis qui nesciunt nisi eum dolor delectus fuga quis sint error, consequatur et, alias iusto laudantium. Commodi amet accusamus eos consequatur rerum, mollitia quidem delectus labore recusandae similique debitis, explicabo, eveniet consequuntur aspernatur totam enim. Qui animi velit quisquam. Impedit commodi enim sapiente, sunt provident quisquam nam modi excepturi incidunt quis eum voluptatum vel voluptatem totam corrupti illum quae esse reprehenderit. Quaerat quis quam consequatur atque natus. Dignissimos non nesciunt suscipit quo inventore itaque ipsa quos accusantium sapiente. Iure quo quisquam id quod blanditiis animi, exercitationem aperiam quaerat aut libero deserunt vel maiores eius incidunt error asperiores facere veritatis! Praesentium, vero ex dolor earum enim, architecto ipsum totam delectus dolores unde autem laboriosam nobis minima, possimus odio iusto quis cupiditate expedita? Odit blanditiis tempore rerum nisi necessitatibus consectetur non adipisci in voluptate esse placeat illum reiciendis rem neque, reprehenderit id eos? Corporis minus, nobis sunt facere rem in ipsa eaque earum maiores officiis? Ducimus magni fugit doloremque, veniam, neque exercitationem, ipsum temporibus autem dolor cupiditate saepe consequuntur eius at aperiam! Aperiam minima minus tenetur, rerum nemo nisi magni nulla autem voluptatibus facere quod dolorum repellat sunt nesciunt fugiat earum fugit soluta, dolor eaque in. Numquam, pariatur, nemo nostrum earum minus praesentium illum dicta maxime voluptates harum fugiat libero sed ipsam deleniti nulla eaque perferendis blanditiis at ipsa optio! Provident, sapiente ad quos illo eligendi exercitationem? Natus esse corrupti dolore quam delectus eveniet deleniti nesciunt, non porro deserunt consectetur ipsa voluptas ipsum atque accusantium aliquam necessitatibus tempora. Obcaecati tempora ab amet impedit suscipit officiis ex, dolor voluptas provident exercitationem culpa inventore quis deleniti velit molestiae sequi corporis fugiat, dolorum nesciunt, quam neque corrupti sunt ipsum. Reprehenderit corporis accusamus suscipit illum. Dolores voluptates perferendis totam rerum alias exercitationem dicta minima eligendi. Similique libero consectetur eius reprehenderit sint maxime eaque temporibus ea fuga possimus ex sunt accusantium odit nihil blanditiis aspernatur, ipsum quibusdam, minima voluptate? Maxime, nulla. Totam veritatis quasi hic nisi laudantium id maxime autem perferendis ex facere eos asperiores ipsum cum aperiam culpa rem odit libero ipsa, itaque iure recusandae eligendi. Optio dolorem provident assumenda quaerat ea tempore qui omnis adipisci! Maiores reprehenderit incidunt molestias modi aut sit eum, repudiandae voluptates accusamus dolore odit nemo, minus illum vel officiis unde omnis, cupiditate neque maxime veritatis est. Possimus, eius? Modi suscipit, minima voluptatum animi possimus nisi numquam, culpa dolorem natus accusantium aut quae repellendus eaque vero blanditiis rem recusandae odit! Assumenda eaque excepturi atque nulla ratione qui laborum natus maiores repudiandae. Distinctio velit, vero laborum incidunt voluptate voluptatum esse vitae nesciunt eaque reiciendis beatae perspiciatis quaerat sed! Sed, est voluptatum libero neque velit cum quisquam molestias? Provident, minus atque repudiandae unde doloremque rem itaque. Suscipit omnis doloribus error autem? Inventore sequi deserunt similique, delectus nesciunt molestias quod, tempora maxime, reiciendis ipsa rem? Sed, id!
+    <div className='pb-20'>
+      <div className="custom-container">
+        {/* User header */}
+        <div className="flex justify-between py-[33px]">
+          <h3 className='text-xl sm:text-2xl leading-[38px] font-medium text-dark'>Users</h3>
+          <div>
+            <div className='flex items-center gap-2 sm:gap-3'>
+              <Button btnClasses="text-sm h-9 sm:h-10 w-[100px] sm:w-[123px] bg-white border border-[#D0D5DD]">
+                <div className='flex items-center gap-2'>
+                  <img className='h-5 w-5' src={importIcon} alt="" />
+                  <span className='text-[#344054]'>import</span>
+                </div>
+              </Button>
+              <Button btnClasses="text-sm h-9 sm:h-10 w-[100px] sm:w-[123px]">
+                <div className='flex items-center gap-2'>
+                  <img className='h-3 w-3' src={plusIcon} alt="" />
+                  <span>Add User</span>
+                </div>
+              </Button>
+            </div>
+          </div>
+        </div>
+
+        {/* User Table */}
+        <div className='overflow-auto user-table'>
+          <div className=' bg-white border border-[#EAECF0] rounded-lg shadow-[0px_1px_2px_0px_rgba(16,24,40,0.06),0px_1px_3px_0px_rgba(16,24,40,0.10)] overflow-x-auto w-[985px] lg:w-full'>
+            <table className='w-full table-auto'>
+              <colgroup>
+                <col className='w-[4.5%]' />
+                <col className='w-[35%]' />
+                <col className='w-[35%]' />
+                <col className='w-[15%]' />
+                <col className='w-[10%]' />
+              </colgroup>
+              <thead>
+                <tr className='bg-[#F9FAFB]'>
+                <th className='pl-6'><img src={baseCheckBox} alt="Checkbox" /></th>
+                  <th className='py-3 pl-3 xl:pl-0'>
+                    <div className="flex items-center gap-1">
+                      <span className='table-header'>User Info</span>
+                      <img src={downArrow} alt="Down Arrow" />
+                    </div>
+                  </th>
+                  <th className='table-header'>About</th>
+                  <th className='table-header'>Status</th>
+                  <th className='table-header'></th>
+                </tr>
+              </thead>
+              <tbody>
+                <UserTableRow />
+                <UserTableRow />
+                <UserTableRow />
+                <UserTableRow />
+                <UserTableRow />
+                <UserTableRow />
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
