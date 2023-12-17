@@ -1,20 +1,11 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import Input from '../../components/app/Input';
 import Button from '../../components/app/Button';
-import {useDispatch, useSelector} from 'react-redux';
-import {loadUsersData} from '../../redux/thunk/fetchUserData';
 
 const Dashboard = () => {
   const [error, setError] = useState(false)
 
-  const { users } = useSelector((state) => state.userData);
-  const dispatch = useDispatch();
-
-    useEffect(() => {
-      dispatch(loadUsersData())
-    }, [dispatch]);
-
-    console.log({users: users})
+ 
 
   return (
     <div>

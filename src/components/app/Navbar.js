@@ -119,14 +119,12 @@ const closeSideNav = () =>{
                       <NavLink
                         to="/"
                         onClick={closeSideNav}
-                        activeClassName='text-blue-500'
                         className="nav-link">
                           Home
                       </NavLink>
                       <NavLink
                         to="/users"
                         onClick={closeSideNav}
-                        activeClassName='is-active'
                         className="nav-link">
                           Users
                       </NavLink>
