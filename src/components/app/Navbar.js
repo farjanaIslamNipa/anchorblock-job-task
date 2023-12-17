@@ -38,9 +38,9 @@ const closeSideNav = () =>{
               <div className="flex justify-between items-center">
                 <div className="bg-brand">
                   <div className='flex gap-3 items-center'>
-                    <NavLink to="/" >
+                    <div>
                       <img src={logo} alt="Stack Logo" />
-                    </NavLink>
+                    </div>
                     <div className='text-xl font-bold text-white'>Stack</div>
                   </div>
                 </div>
@@ -77,10 +77,10 @@ const closeSideNav = () =>{
                   <div className="block lg:hidden">
                     <div className="flex justify-between bg-brand px-2 h-[73px] items-center">
                       <div className="pl-4">
-                        <NavLink to="/" className='flex gap-3'>
+                        <div className='flex gap-3'>
                           <img src={logo} alt='Stack logo' />
                           <span className='text-xl font-bold text-white inline-block'>Stack</span>
-                        </NavLink>
+                        </div>
                       </div>
                       <div className="flex lg:hidden gap-2 items-center pr-3">
                         <button className='m-1'><img src={searchIcon} alt="Search" /></button>

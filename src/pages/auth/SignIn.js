@@ -10,7 +10,7 @@ import {setUser} from '../../features/auth/authSlice';
 const SignIn = () => {
 
   const dispatch = useAppDispatch();
-  const navigate =useNavigate();
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     email: '',
     password: ''

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import Button from '../../components/app/Button'
 import plusIcon from '../../assets/images/plus-icon.svg'
 import importIcon from '../../assets/images/import-icon.svg'
@@ -6,12 +6,23 @@ import importIcon from '../../assets/images/import-icon.svg'
 // import checkedBox from '../../assets/images/checked-box.svg'
 import baseCheckBox from '../../assets/images/checkbox-base.svg'
 import downArrow from '../../assets/images/arrow-down.svg'
-import userLogo from '../../assets/images/user.svg'
-import deleteIcon from '../../assets/images/delete-icon.svg'
-import editIcon from '../../assets/images/edit-icon.svg'
+
 import UserTableRow from '../../components/UserTableRow';
+import {useDispatch} from 'react-redux';
+import {useGetUsersQuery} from '../../features/api/apiSlice';
 
 const User = () => {
+  const dispatch = useDispatch();
+
+  const { data, isLoading, isSuccess, isError, error } = useGetUsersQuery();
+
+  const users = data?.data
+  
+  console.log(users, 'user')
+
+
+
+
   return (
     <div className='pb-20'>
       <div className="custom-container">
