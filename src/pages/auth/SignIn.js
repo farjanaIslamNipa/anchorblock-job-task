@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import {useEffect, useState} from 'react';
 import logo from '../../assets/images/logo-dark.svg'
 import Input from '../../components/app/Input';
 import Button from '../../components/app/Button';

@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import {useEffect, useState} from 'react';
 import logo from '../../assets/images/logo-dark.svg'
 import Input from '../../components/app/Input';
 import Button from '../../components/app/Button';
@@ -12,6 +12,10 @@ const SignUp = () => {
   const [emailError, setEmailError] = useState('')
   const [passwordError, setPasswordError] = useState('')
   const [notFoundError, setNotFoundError] = useState('')
+  const [activeIndex, setActiveIndex] = useState(0)
+
+  const barCount = [1, 2, 3, 4 ,5, 6];
+
   const [formData, setFormData] = useState({
     email: '',
     password: ''
@@ -22,8 +26,6 @@ const SignUp = () => {
   }
 
   const [signUpUser, {data, isLoading, isError, error, isSuccess}] = useSignupUserMutation();
-
-  console.log(error, 'error')
 
   const proceedToSignUp = (e) => {
     e.preventDefault()
@@ -67,6 +69,19 @@ const SignUp = () => {
     }
     if(formData?.password !== ''){
       setPasswordError('')
+    }
+
+    if(formData?.password?.length >= 2){
+      setActiveIndex(1)
+    }
+    if(formData?.password?.length >= 4){
+      setActiveIndex(2)
+    }
+    if(formData?.password?.length >= 6){
+      setActiveIndex(4)
+    }
+    if(formData?.password.includes('@') >= 6){
+      setActiveIndex(5)
     }
 
     // Failed to sign up error
@@ -114,12 +129,20 @@ const SignUp = () => {
                 {passwordError && <p className='text-[#F04438]'>{ passwordError }</p>}
               </div>
               <div className="mt-[17px] flex gap-3">
+                {
+                  barCount?.map((bar, index) => (
+                    <>
+                    <div key={index} className={`${index <= activeIndex - 1 ? 'bg-red-500' : 'bg-[#F3F3F3]'} h-1 w-11 rounded-[2px] bg-[#F3F3F3]`}></div>
+                    </>
+                    
+                  ))
+                }
+                {/* <div className="h-1 w-11 rounded-[2px] bg-[#F04438]"></div>
                 <div className="h-1 w-11 rounded-[2px] bg-[#F04438]"></div>
-                <div className="h-1 w-11 rounded-[2px] bg-[#F04438]"></div>
                 <div className="h-1 w-11 rounded-[2px] bg-[#F3F3F3]"></div>
                 <div className="h-1 w-11 rounded-[2px] bg-[#F3F3F3]"></div>
                 <div className="h-1 w-11 rounded-[2px] bg-[#F3F3F3]"></div>
-                <div className="h-1 w-11 rounded-[2px] bg-[#F3F3F3]"></div>
+                <div className="h-1 w-11 rounded-[2px] bg-[#F3F3F3]"></div> */}
               </div>
               <div className="mt-[17px] mb-8 mx-auto max-w-[320px]">
               <Button type={'submit'}>

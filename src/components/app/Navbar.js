@@ -17,8 +17,8 @@ const Navbar = () => {
   }
 
   const closeSideNav = () =>{
-      const sideNav = document.getElementById("nav-items");
-      if(sideNav.style.width === "100%") {sideNav.style.width = "0" }
+    const sideNav = document.getElementById("nav-items");
+    if(sideNav.style.width === "100%") {sideNav.style.width = "0"}
   }
 
   return (

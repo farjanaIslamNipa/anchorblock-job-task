@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import {useState} from 'react';
 import uncheckedBox from '../assets/images/unchecked-box.svg'
 import checkedBox from '../assets/images/checked-box.svg'
 import deleteIcon from '../assets/images/delete-icon.svg'

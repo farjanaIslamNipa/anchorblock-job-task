@@ -1,48 +1,45 @@
-import React from 'react';
 import Button from '../../components/app/Button'
 import plusIcon from '../../assets/images/plus-icon.svg'
 import importIcon from '../../assets/images/import-icon.svg'
 import baseCheckBox from '../../assets/images/checkbox-base.svg'
 import downArrow from '../../assets/images/arrow-down.svg'
-
 import UserTableRow from '../../components/UserTableRow';
 import {useDispatch, useSelector} from 'react-redux';
-import {useGetUsersQuery} from '../../features/api/apiSlice';
 import {userActions} from '../../features/user/userSlice';
-import {useParams} from 'react-router-dom';
+import {useGetUsersQuery} from '../../features/user/userApi';
 
 const User = () => {
   const dispatch = useDispatch();
 
   const currentPage =  useSelector((state) => state.users.currentPage)
   let usersPerPage =  useSelector((state) => state.users.usersPerPage)
+  let page =  useSelector((state) => state.users.page)
 
-  const { data, isLoading, isSuccess, isError, error } = useGetUsersQuery();
+  const { data } = useGetUsersQuery();
 
   const users = data?.data
 
   const totalPages = data?.total_pages
   usersPerPage = data?.per_page;
-  const page = data?.page;
+  page = data?.page;
   const indexOfLastPage = currentPage * usersPerPage;
   const indexOfFirstPage = indexOfLastPage - usersPerPage;
 
-  console.log({last:indexOfLastPage}, {fast:indexOfFirstPage}, {page: page})
+  console.log({page:page})
 
   const visibleUsers = users?.slice(indexOfFirstPage, indexOfLastPage)
 
-  // console.log(visibleUsers, 'visible user')
-
-const navigatePrev = () => {
-  if(currentPage !== 1){
-    dispatch(userActions.onNavigatePrev())
+  const navigatePrev = () => {
+    if(currentPage !== 1){
+      dispatch(userActions.onNavigatePrev())
+    }
   }
-}
-const navigateNext = () => {
-  if(currentPage !== totalPages){
-    dispatch(userActions.onNavigateNext())
+  const navigateNext = () => {
+    if(currentPage !== totalPages){
+      dispatch(userActions.onNavigateNext())
+    
+    }
   }
-}
 
 
   return (
