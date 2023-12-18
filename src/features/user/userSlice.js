@@ -4,21 +4,39 @@ const initialState = {
   users: [],
   isLoading: false,
   isError: false,
-  error: ""
+  error: "",
+  usersPerPage: 6,
+  currentPage: 1,
 };
 
 export const getUsers = createAsyncThunk("users/getUsers", async () => {
-  const res = await fetch("https://reqres.in/api/users?page=2")
+  const res = await fetch("https://reqres.in/api/users")
 
   const data = await res.json();
 
-  console.log(data, 'data')
-
   return data;
 });
+
+
+
+
 const userSlice = createSlice({
   name: "users",
   initialState,
+  reducers: {
+    onNavigateNext: (state) => {
+      state.currentPage++;
+    },
+    onNavigatePrev: (state) => {
+      state.currentPage--;
+    },
+    onChangeToPerPage: (state, action) => {
+      state.usersPerPage = action.payload;
+    },
+    onClickCurrentPage: (state, action) => {
+      state.currentPage = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(getUsers.pending, (state) => {
       state.isLoading = true;
@@ -36,5 +54,7 @@ const userSlice = createSlice({
     })
   }
 });
+
+export const userActions = userSlice.actions
 
 export default userSlice.reducer

@@ -1,26 +1,48 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import Button from '../../components/app/Button'
 import plusIcon from '../../assets/images/plus-icon.svg'
 import importIcon from '../../assets/images/import-icon.svg'
-// import uncheckedBox from '../../assets/images/unchecked-box.svg'
-// import checkedBox from '../../assets/images/checked-box.svg'
 import baseCheckBox from '../../assets/images/checkbox-base.svg'
 import downArrow from '../../assets/images/arrow-down.svg'
 
 import UserTableRow from '../../components/UserTableRow';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {useGetUsersQuery} from '../../features/api/apiSlice';
+import {userActions} from '../../features/user/userSlice';
+import {useParams} from 'react-router-dom';
 
 const User = () => {
   const dispatch = useDispatch();
 
+  const currentPage =  useSelector((state) => state.users.currentPage)
+  let usersPerPage =  useSelector((state) => state.users.usersPerPage)
+
   const { data, isLoading, isSuccess, isError, error } = useGetUsersQuery();
 
   const users = data?.data
-  
-  console.log(users, 'user')
 
+  const totalPages = data?.total_pages
+  usersPerPage = data?.per_page;
+  const page = data?.page;
+  const indexOfLastPage = currentPage * usersPerPage;
+  const indexOfFirstPage = indexOfLastPage - usersPerPage;
 
+  console.log({last:indexOfLastPage}, {fast:indexOfFirstPage}, {page: page})
+
+  const visibleUsers = users?.slice(indexOfFirstPage, indexOfLastPage)
+
+  // console.log(visibleUsers, 'visible user')
+
+const navigatePrev = () => {
+  if(currentPage !== 1){
+    dispatch(userActions.onNavigatePrev())
+  }
+}
+const navigateNext = () => {
+  if(currentPage !== totalPages){
+    dispatch(userActions.onNavigateNext())
+  }
+}
 
 
   return (
@@ -73,12 +95,26 @@ const User = () => {
                 </tr>
               </thead>
               <tbody>
-                <UserTableRow />
-                <UserTableRow />
-                <UserTableRow />
-                <UserTableRow />
-                <UserTableRow />
-                <UserTableRow />
+                {
+                  visibleUsers?.map(user => <UserTableRow user={user} key={user.id} />)
+                }
+                <tr>
+                  <td colSpan="5" className='w-full pt-3 pb-4 px-6'>
+                    <div className="flex justify-between items-center">
+                      <div>
+                        <button onClick={navigatePrev} className='px-[14px] py-2 border border-lightGray rounded-[8px] text-sm font-medium text-defaultGray'>
+                          Prev
+                        </button>
+                      </div>
+                      <div className='text-sm text-defaultGray font-medium'>Page {currentPage} of { totalPages }</div>
+                      <div>
+                        <button onClick={navigateNext} className='px-[14px] py-2 border border-lightGray rounded-[8px] text-sm font-medium text-defaultGray'>
+                          Next
+                        </button>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
               </tbody>
             </table>
           </div>

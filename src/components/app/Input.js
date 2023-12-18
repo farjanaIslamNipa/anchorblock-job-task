@@ -9,8 +9,6 @@ const Input = ({
   placeholder, 
 }) => {
 
-
-
   return (
     <>
       <input 

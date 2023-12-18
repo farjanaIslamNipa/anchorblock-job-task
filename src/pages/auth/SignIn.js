@@ -6,30 +6,30 @@ import {Link, useNavigate} from 'react-router-dom';
 import {useAppDispatch} from '../../app/hook';
 import {useSignInUserMutation} from '../../features/auth/authApi';
 import {setUser} from '../../features/auth/authSlice';
+import loader from '../../assets/images/loading.gif'
 
 const SignIn = () => {
-
-  const dispatch = useAppDispatch();
-  const navigate = useNavigate();
+  const [emailError, setEmailError] = useState('')
+  const [passwordError, setPasswordError] = useState('')
+  const [notFoundError, setNotFoundError] = useState('')
   const [formData, setFormData] = useState({
     email: '',
     password: ''
   })
 
- 
-
-  const handleChange = (e) => {
+  const handleInputChange = (e) => {
     setFormData({...formData, [e.target.name]:e.target.value});
   }
 
+  const [signInUser, {data, isLoading, isError, error, isSuccess}] = useSignInUserMutation();
 
-  const [signInUser, {data, isLoading, isError, isSuccess}] = useSignInUserMutation();
-  console.log(data, 'error')
-
-  const submitForm = (e) => {
+  const proceedToSignIn = (e) => {
     e.preventDefault()
     signInUser({ ...formData });
   }
+
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (isSuccess) {
@@ -38,20 +38,41 @@ const SignIn = () => {
       localStorage.setItem("token", data.token);
     }
   })
-  
 
-  // const validate = () => {
-  //   let result = true
-  //   if(userName === '' || userName === null){
-  //     result = false;
-  //     setError(error.name = 'Name field is required')
-  //   }
-  //   if(password === '' || password === null){
-  //     setError(error.password = 'Password field is required')
-  //   }
+ 
+// Handling validation error
+  useEffect(() => {
+    // Set email error
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const isValidEmail = (email) => {
+        return emailPattern.test(email);
+      }
 
-  //   return result
-  // }
+    if(isError && error?.data?.error === 'Missing email or username'){
+      setEmailError(error.data.error)
+    }
+    if(formData?.email !== ''){
+      if(!isValidEmail(formData?.email)){
+        setEmailError('Invalid email format')
+      }else{
+        setEmailError('')
+      }
+    }
+
+    // Set password error
+    if(isError && error?.data?.error === 'Missing password'){
+      setPasswordError(error.data.error)
+    }
+    if(formData?.password !== ''){
+      setPasswordError('')
+    }
+
+    // User not found error
+    if(isError && error?.data?.error === 'user not found'){
+      setNotFoundError('user not found')
+    }
+  }, [isError, error, emailError, passwordError, formData])
+
 
   return (
     <div className='bg-white h-screen flex items-center justify-center w-full'>
@@ -63,29 +84,40 @@ const SignIn = () => {
           </div>
           <p className='text-dark text-xl leading-6 font-semibold'>Sign in to join with Stack</p>
           <div className="mt-[52px]">
-            <form onSubmit={submitForm}>
+            {notFoundError && <p className='text-[#F04438] pb-1 capitalize text-center'>{ notFoundError }</p>}
+            <form onSubmit={proceedToSignIn}>
               <div className="mb-5">
                 <label className='text-defaultGray text-sm font-medium mb-[6px] block'>Email</label>
                 <Input 
                 type={'text'}
                 name={'email'}
-                handleChange={handleChange}
+                error={emailError}
+                handleChange={handleInputChange}
                 inputValue={formData.email} 
                 placeholder={'Enter Email'} 
                 />
+                {emailError && <p className='text-[#F04438]'>{ emailError }</p>}
+                
               </div>
               <div className="mb-5">
                 <label className='text-defaultGray text-sm font-medium mb-[6px] block'>Password</label>
                 <Input 
                 type={'password'}
                 name={'password'}
-                handleChange={handleChange}
+                error={passwordError}
+                handleChange={handleInputChange}
                 inputValue={formData.password} 
                 placeholder={'Enter Password'} 
                 />
+                {passwordError && <p className='text-[#F04438]'>{ passwordError }</p>}
               </div>
               <div className="mt-[17px] mb-8 mx-auto max-w-[320px]">
-                <Button type={'submit'}>Sign In</Button>
+                <Button type={'submit'}>
+                  {isLoading ? 
+                  <img src={loader} alt='loader' className='h-5' />
+                  : 
+                  'Sign In'}
+                  </Button>
               </div>
               <div className='text-lightGray text-base font-medium'>Already have an account? <Link to="/sign-up" className='text-[#377DFF]'>Sign Up</Link></div>
             </form>

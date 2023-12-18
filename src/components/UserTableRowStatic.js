@@ -5,18 +5,17 @@ import userLogo from '../assets/images/user.svg'
 import deleteIcon from '../assets/images/delete-icon.svg'
 import editIcon from '../assets/images/edit-icon.svg'
 
-const UserTableRow = ({user}) => {
-  const userName = `${user?.first_name} ${user?.last_name}`
+const UserTableRow = () => {
   return (
     <>
       <tr className='border border-[#EAECF0] border-x-0'>
         <td className='pl-6 py-4'><img src={checkedBox} alt="Checkbox" /></td>
         <td className='py-4 pl-3 xl:pl-0'>
           <div className="flex items-center gap-3">
-            <img src={user?.avatar} alt="User" className='h-10 w-10 rounded-full' />
+            <img src={userLogo} alt="User" className='h-10 w-10 rounded-full' />
             <div>
-              <p className='text-dark text-sm font-medium capitalize'>{ userName  }</p>
-              <p className='text-defaultGray text-sm'>{ user?.email }</p>
+              <p className='text-dark text-sm font-medium capitalize'>User Name</p>
+              <p className='text-defaultGray text-sm'>michael.lawson@reqres.in</p>
             </div>
           </div>
         </td>
