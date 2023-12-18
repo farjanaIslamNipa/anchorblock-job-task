@@ -86,6 +86,7 @@ const SignIn = () => {
           <div className="mt-[52px]">
             {notFoundError && <p className='text-[#F04438] pb-1 capitalize text-center'>{ notFoundError }</p>}
             <form onSubmit={proceedToSignIn}>
+              {/* Email */}
               <div className="mb-5">
                 <label className='text-defaultGray text-sm font-medium mb-[6px] block'>Email</label>
                 <Input 
@@ -97,8 +98,9 @@ const SignIn = () => {
                 placeholder={'Enter Email'} 
                 />
                 {emailError && <p className='text-[#F04438]'>{ emailError }</p>}
-                
               </div>
+
+              {/* Password */}
               <div className="mb-5">
                 <label className='text-defaultGray text-sm font-medium mb-[6px] block'>Password</label>
                 <Input 

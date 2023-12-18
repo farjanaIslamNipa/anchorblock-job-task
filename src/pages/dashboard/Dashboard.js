@@ -5,7 +5,9 @@ import Button from '../../components/app/Button';
 const Dashboard = () => {
   const [error, setError] = useState(false)
 
- 
+  const token = localStorage.getItem("token")
+
+  console.log(token, 'token')
 
   return (
     <div className='custom-container'>
