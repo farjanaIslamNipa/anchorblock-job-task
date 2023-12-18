@@ -21,23 +21,25 @@ const SignIn = () => {
     setFormData({...formData, [e.target.name]:e.target.value});
   }
 
-  const [signInUser, {data, isLoading, isError, error, isSuccess}] = useSignInUserMutation();
+  const [signInUser, {data, isLoading, isError, error }] = useSignInUserMutation();
 
   const proceedToSignIn = (e) => {
     e.preventDefault()
     signInUser({ ...formData });
   }
 
+  const token = data?.token;
+
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (isSuccess) {
-      dispatch(setUser({ token: data.token }));
+    if (token) {
+      dispatch(setUser({ token: token }));
       navigate("/");
-      localStorage.setItem("token", data.token);
+      localStorage.setItem("token", token);
     }
-  })
+  },[token, dispatch, navigate])
 
  
 // Handling validation error

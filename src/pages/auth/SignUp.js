@@ -25,24 +25,25 @@ const SignUp = () => {
     setFormData({...formData, [e.target.name]:e.target.value});
   }
 
-  const [signUpUser, {data, isLoading, isError, error, isSuccess}] = useSignupUserMutation();
+  const [signUpUser, {data, isLoading, isError, error }] = useSignupUserMutation();
 
   const proceedToSignUp = (e) => {
     e.preventDefault()
     signUpUser({ ...formData });
   }
 
+  const token = data?.token;
+
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (isSuccess) {
-      dispatch(setUser({ token: data.token }));
+    if (token) {
+      dispatch(setUser({ token: token }));
       navigate("/");
-      localStorage.setItem("token", data.token);
+      localStorage.setItem("token", token);
     }
-  })
-
+  },[token, dispatch, navigate])
  
 // Handling validation error
   useEffect(() => {
