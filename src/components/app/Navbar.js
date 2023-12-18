@@ -12,21 +12,14 @@ const Navbar = () => {
     sideNav.style.width = "100%";
   }
 
-const preventClosing = (event) => {
-event.stopPropagation();
-}
+  const preventClosing = (event) => {
+  event.stopPropagation();
+  }
 
-const closeSideNav = () =>{
-    const sideNav = document.getElementById("nav-items");
-    if(sideNav.style.width === "100%") {sideNav.style.width = "0" }
-}
-
-// window.onload = function() {
-// if(props.sticky === true){
-//   const navHeight = document.getElementById('nav-height').getBoundingClientRect().height
-//   document.getElementById('adjust-spacing').style.height = navHeight + 'px'
-// }
-// }
+  const closeSideNav = () =>{
+      const sideNav = document.getElementById("nav-items");
+      if(sideNav.style.width === "100%") {sideNav.style.width = "0" }
+  }
 
   return (
     <>
@@ -37,12 +30,12 @@ const closeSideNav = () =>{
             <div className="w-full lg:w-[150px]">
               <div className="flex justify-between items-center">
                 <div className="bg-brand">
-                  <div className='flex gap-3 items-center'>
+                  <NavLink to="/" className='flex gap-3 items-center'>
                     <div>
                       <img src={logo} alt="Stack Logo" />
                     </div>
                     <div className='text-xl font-bold text-white'>Stack</div>
-                  </div>
+                  </NavLink>
                 </div>
                 <div className="lg:hidden">
                   <button type="button" onClick={openNav}>
@@ -73,20 +66,20 @@ const closeSideNav = () =>{
                 className="bg-black/50 lg:bg-transparent nav-item-container full-width">
                 <div
                 onClick={preventClosing}
-                className="h-screen lg:h-auto bg-transparent w-[80%] md:w-[60%] lg:w-full bg-white lg:bg-transparent">
+                className="h-screen lg:h-auto bg-transparent w-[85%] sm:w-[80%] md:w-[60%] lg:w-full bg-white lg:bg-transparent">
                   <div className="block lg:hidden">
                     <div className="flex justify-between bg-brand px-2 h-[73px] items-center">
-                      <div className="pl-4">
-                        <div className='flex gap-3'>
+                      <NavLink to="/" className="pl-4">
+                        <div className='flex gap-1 sm:gap-3 items-center'>
                           <img src={logo} alt='Stack logo' />
                           <span className='text-xl font-bold text-white inline-block'>Stack</span>
                         </div>
-                      </div>
+                      </NavLink>
                       <div className="flex lg:hidden gap-2 items-center pr-3">
-                        <button className='m-1'><img src={searchIcon} alt="Search" /></button>
-                        <button className='m-1'><img src={settingsIcon} alt="Search" /></button>
-                        <button className='m-1'><img src={notification} alt="Search" /></button>
-                        <button className=' ml-2'><img src={avatar} alt="Search" /></button>
+                        <button className='m-0 sm:m-1'><img src={searchIcon} alt="Search" /></button>
+                        <button className='m-0 sm:m-1'><img src={settingsIcon} alt="Search" /></button>
+                        <button className='m-0 sm:m-1'><img src={notification} alt="Search" /></button>
+                        <button className='ml-1 sm:ml-2'><img src={avatar} alt="Search" /></button>
                       </div>
                       <div className="absolute right-3 top-5">
                         <button
@@ -115,17 +108,17 @@ const closeSideNav = () =>{
                     </div>
                   </div>
                   <div className="items-center pl-5 lg:pl-[50px] lg:flex justify-between">
-                    <nav className="flex flex-col lg:flex-row pt-8 lg:pt-0">
+                    <nav className="flex flex-col lg:flex-row pt-8 lg:pt-0 mr-5 lg:mr-0">
                       <NavLink
                         to="/"
                         onClick={closeSideNav}
-                        className="nav-link">
+                        className={({ isActive }) => isActive ? 'is-active nav-link' : 'nav-link'}>
                           Home
                       </NavLink>
                       <NavLink
                         to="/users"
                         onClick={closeSideNav}
-                        className="nav-link">
+                        className={({ isActive }) => isActive ? 'is-active nav-link' : 'nav-link'}>
                           Users
                       </NavLink>
                       <NavLink

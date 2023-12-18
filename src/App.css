@@ -12,10 +12,10 @@ body{
 }
 
 .nav-link{
-  @apply px-3 py-2 rounded-[6px] text-base font-medium hover:bg-[#7F56D9] transform duration-200 ease-out
+  @apply px-3 py-2 rounded-[6px] text-base font-medium hover:bg-[#7F56D9] hover:text-white transform duration-200 ease-out
 }
-.active{
-  @apply bg-[#7F56D9]
+.is-active{
+  @apply bg-[#7F56D9] text-white
 }
 @media(min-width:1024px){
  .full-width{
@@ -33,6 +33,7 @@ body{
     overflow-x: hidden;
     transition: 0.3s;
     white-space: nowrap;
+    left: 0;
   }
 }
 

@@ -1,16 +1,25 @@
-import React from 'react';
+import React, {useState} from 'react';
 import uncheckedBox from '../assets/images/unchecked-box.svg'
 import checkedBox from '../assets/images/checked-box.svg'
-import userLogo from '../assets/images/user.svg'
 import deleteIcon from '../assets/images/delete-icon.svg'
 import editIcon from '../assets/images/edit-icon.svg'
 
 const UserTableRow = ({user}) => {
+  const[selectedUser, setSelectedUser] = useState(false);
   const userName = `${user?.first_name} ${user?.last_name}`
   return (
     <>
       <tr className='border border-[#EAECF0] border-x-0'>
-        <td className='pl-6 py-4'><img src={checkedBox} alt="Checkbox" /></td>
+        <td className='pl-6 py-4'>
+          <button onClick={() => setSelectedUser(!selectedUser)}>
+            {
+              selectedUser ?
+              <img src={checkedBox} alt="Checkbox" />
+              :
+              <img src={uncheckedBox} alt="Checkbox" />
+            }
+          </button>
+        </td>
         <td className='py-4 pl-3 xl:pl-0'>
           <div className="flex items-center gap-3">
             <img src={user?.avatar} alt="User" className='h-10 w-10 rounded-full' />
